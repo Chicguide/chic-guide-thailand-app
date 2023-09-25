@@ -9,7 +9,7 @@ export const environment = {
   androidHeaderColor: '#5588a7',
   defaultUnit: 'km',
   defaultLang: 'en',
-  googleClientId: '427617387136-dp3kohgeo74hsrvjkjc7v9207c8k41jh.apps.googleusercontent.com',
+  googleClientId: '824153985838-ng4e3ig620o55bb40j7ak1ooscclhjeb.apps.googleusercontent.com',
   oneSignal: {
     appId: '527b4f66-61bc-4c47-a512-a41f5cf3fc17',
     googleProjectNumber: '1071340130209'
@@ -26,7 +26,6 @@ export const environment = {
     storageBucket: "chic-guide-thailand2.appspot.com",
     messagingSenderId: "427617387136",
     appId: "1:427617387136:web:33e2c135c3f1360ecb9c65",
-    measurementId: "G-7BV434TDPL"// Storage
+    measurementId: "G-7BV434TDPL"
   }
-
 };

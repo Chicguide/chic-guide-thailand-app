@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the Ionic application for production
-RUN npm run build
+RUN node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod --base-href ./
 
 # Stage 2: Serve the application in a smaller image
 FROM nginx:alpine
