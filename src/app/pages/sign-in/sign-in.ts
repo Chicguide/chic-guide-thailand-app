@@ -125,7 +125,14 @@ export class SignInPage extends BasePage {
         this.translate
           .get('INVALID_CREDENTIALS')
           .subscribe(str => this.showToast(str));
-      } else {
+      } 
+      else if (err.code === 141){
+        // this.translate
+        //   .get('INVALID_CREDENTIALS')
+        //   .subscribe(str => this.showToast(str));
+        this.showToast('Please contact the staff. to active an account');
+      }
+      else {
         this.translate
           .get('ERROR_NETWORK')
           .subscribe(str => this.showToast(str));
@@ -136,8 +143,8 @@ export class SignInPage extends BasePage {
   async onAppleButtonTouched() {
     try {
       let options: SignInWithAppleOptions = {
-        clientId: null,
-        redirectURI: null,
+        clientId: "com.app.chicguidethailand",
+        redirectURI: "https://chicguidethailand.com/#/1/profile",
         scopes: 'email name',
         state: null,
         nonce: null,

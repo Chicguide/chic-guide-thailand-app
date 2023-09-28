@@ -90,6 +90,10 @@ export class User extends Parse.User {
     });
   }
 
+  deleteAccount(data: any = {}): Promise<{ sessionToken: string }> {
+    return Parse.Cloud.run('deleteAccount', data);
+  }
+
   get name(): string {
     return this.get('name');
   }
