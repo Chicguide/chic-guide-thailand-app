@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { WalkthroughPage } from './walkthrough';
-import { SharedModule } from '../../shared.module';
 import { SwiperModule } from 'swiper/angular';
+import { SharedModule } from 'src/app/shared.module';
  
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import { SwiperModule } from 'swiper/angular';
   ],
   imports: [
     SharedModule,
-    SwiperModule,
+    SwiperModule
   ],
 })
 export class WalkthroughPageModule {}

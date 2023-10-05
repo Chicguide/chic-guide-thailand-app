@@ -10,15 +10,15 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-@import '~ngx-sharebuttons/themes/default';
+@import 'node_modules/ngx-sharebuttons/themes/default';
 
-@import "~ngx-bar-rating/themes/br-stars-theme";
+@import "node_modules/ngx-bar-rating/themes/br-stars-theme";
 
 @import "swiper/scss";
 @import "swiper/scss/pagination";
 @import "swiper/scss/navigation";
 
-@import "~@ionic/angular/css/ionic-swiper";
+@import "node_modules/@ionic/angular/css/ionic-swiper";
 
 @font-face {
   font-family: "Quicksand";

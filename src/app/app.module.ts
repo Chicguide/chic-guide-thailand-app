@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,11 +40,11 @@ registerLocaleData(localeAr);
 registerLocaleData(localeEs);
 
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper';
-import { IonicSwiper } from '@ionic/angular';
+// import { IonicSwiper } from '@ionic/angular';
 import { EmptyViewModule } from './components/empty-view/empty-view.module';
 import { NotificationPageModule } from './pages/notification/notification.module';
 
-SwiperCore.use([IonicSwiper, Pagination, Navigation, Autoplay]);
+SwiperCore.use([ Pagination, Navigation, Autoplay]);
 
 @NgModule({
   declarations: [AppComponent],
@@ -74,8 +74,9 @@ SwiperCore.use([IonicSwiper, Pagination, Navigation, Autoplay]);
       enabled: environment.production && !isPlatform('capacitor'),
     })
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })

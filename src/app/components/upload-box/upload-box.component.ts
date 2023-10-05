@@ -96,7 +96,6 @@ export class UploadBoxComponent implements OnInit {
         quality: 70,
         width: 800,
         height: 600,
-        preserveAspectRatio: true,
         allowEditing: true,
         correctOrientation: true,
         source: source,

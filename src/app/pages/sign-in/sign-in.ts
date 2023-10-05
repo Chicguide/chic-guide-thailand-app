@@ -9,7 +9,7 @@ import { AppConfigService } from 'src/app/services/app-config.service';
 import { Device } from '@capacitor/device';
 import { SignInWithApple, SignInWithAppleOptions, SignInWithAppleResponse } from '@capacitor-community/apple-sign-in';
 import { FacebookLogin } from '@capacitor-community/facebook-login';
-import { GoogleAuth } from '@fmendoza/capacitor-google-auth';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { isPlatform } from '@ionic/angular';
 import * as Parse from 'parse';
 import { Capacitor } from '@capacitor/core';
@@ -131,8 +131,7 @@ export class SignInPage extends BasePage {
         //   .get('INVALID_CREDENTIALS')
         //   .subscribe(str => this.showToast(str));
         this.showToast('Please contact the staff. to active an account');
-      }
-      else {
+      } else {
         this.translate
           .get('ERROR_NETWORK')
           .subscribe(str => this.showToast(str));
@@ -248,6 +247,9 @@ export class SignInPage extends BasePage {
       const { sessionToken } = await this.userService.loginInCloud({
         provider: 'google',
         authData,
+        extraData:{
+          email:res.email
+        }
       });
 
       const user = await this.userService.becomeWithSessionToken(sessionToken);

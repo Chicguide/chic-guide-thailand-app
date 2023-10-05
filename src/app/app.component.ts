@@ -22,9 +22,10 @@ import { NavigationEnd } from '@angular/router';
 import { Keyboard, KeyboardStyle } from '@capacitor/keyboard';
 import { isPlatform } from '@ionic/angular';
 import OneSignal from 'onesignal-cordova-plugin';
-import { NotificationReceivedEvent, OpenedEvent } from 'onesignal-cordova-plugin/types/Notification';
 import Utils from './utils';
 import { NotificationPage } from './pages/notification/notification.page';
+import { OpenedEvent } from 'onesignal-cordova-plugin/dist/models/NotificationOpened';
+import NotificationReceivedEvent from 'onesignal-cordova-plugin/dist/NotificationReceivedEvent';
 
 @Component({
   selector: 'app-root',

@@ -31,7 +31,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.280692033654-2f8dsvvosebk0s9r8mjcc2l9bqnusi0b</string>
+				<string>com.googleusercontent.apps.427617387136-h1hm398kgamcmcsonnta0pvgni0sk2rl</string>
 			</array>
 		</dict>
 	</array>
@@ -81,7 +81,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires camera access to select and upload user and listing pictures.</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.280692033654-2f8dsvvosebk0s9r8mjcc2l9bqnusi0b</string>
+	<string>com.googleusercontent.apps.427617387136-h1hm398kgamcmcsonnta0pvgni0sk2rl</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

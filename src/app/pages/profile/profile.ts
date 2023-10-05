@@ -7,7 +7,7 @@ import { ChangePasswordPage } from '../change-password/change-password';
 import { SignInPage } from '../sign-in/sign-in';
 import { SettingsPage } from '../settings/settings';
 import { AppConfigService } from 'src/app/services/app-config.service';
-import { AlertController, IonContent } from '@ionic/angular';
+import { AlertController,IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',

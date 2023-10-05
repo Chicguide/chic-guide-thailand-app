@@ -11,6 +11,7 @@
       <ion-label>{{ 'LIKE' | translate }}</ion-label>
     </ion-tab-button>
 
+
     <ion-tab-button tab="explore" layout="icon-top" (click)="handleTabClick($event)">
       <ion-icon name="search-outline"></ion-icon>
       <ion-label>{{ 'EXPLORE' | translate }}</ion-label>
@@ -33,11 +34,6 @@
       <ion-label>{{ 'HOME' | translate }}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="likes" layout="icon-start" (click)="handleTabClick($event)">
-      <ion-icon name="heart-outline"></ion-icon>
-      <ion-label>{{ 'LIKE' | translate }}</ion-label>
-    </ion-tab-button>
-
     <ion-tab-button tab="explore" layout="icon-start" (click)="handleTabClick($event)">
       <ion-icon name="search-outline"></ion-icon>
       <ion-label>{{ 'EXPLORE' | translate }}</ion-label>
@@ -52,7 +48,6 @@
       <ion-icon name="person-outline"></ion-icon>
       <ion-label>{{ 'PROFILE' | translate }}</ion-label>
     </ion-tab-button>
-    
   </ion-tab-bar>
 
 </ion-tabs>

@@ -1,84 +1,49 @@
 {
   "project_info": {
-    "project_number": "280692033654",
-    "project_id": "chic-guide-thailand-59013",
-    "storage_bucket": "chic-guide-thailand-59013.appspot.com"
+    "project_number": "427617387136",
+    "project_id": "chic-guide-thailand2",
+    "storage_bucket": "chic-guide-thailand2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:280692033654:android:8e000d903040b63262b757",
-        "android_client_info": {
-          "package_name": "com.chicguide.appchicguide.thailand"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "280692033654-6nn3i41t39t6ldnl8goni2diioguhdro.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDKw-Y662DruqkqliA2y3-SVel3Z8cvlF4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "117944299463331226803",
-              "client_type": 3
-            },
-            {
-              "client_id": "280692033654-2f8dsvvosebk0s9r8mjcc2l9bqnusi0b.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.appchicguide.thailand"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:280692033654:android:ed09b1f63a16688a62b757",
+        "mobilesdk_app_id": "1:427617387136:android:d6e8006792ec4390cb9c65",
         "android_client_info": {
           "package_name": "com.chicguide.thailand"
         }
       },
       "oauth_client": [
         {
-          "client_id": "280692033654-8androdn6ocvf912b8bp4q3qepp6mgtt.apps.googleusercontent.com",
+          "client_id": "427617387136-m8k3i2o0c46tg7u18k1m63unijmk9m7i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.chicguide.thailand",
-            "certificate_hash": "d8e1a2e7f5c00e09a86a45ed7430e8decd64ae9d"
+            "certificate_hash": "035eb51ee465538f79be03bb906ea4f8e7cf9178"
           }
         },
         {
-          "client_id": "280692033654-6nn3i41t39t6ldnl8goni2diioguhdro.apps.googleusercontent.com",
+          "client_id": "427617387136-dp3kohgeo74hsrvjkjc7v9207c8k41jh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDKw-Y662DruqkqliA2y3-SVel3Z8cvlF4"
+          "current_key": "AIzaSyDLdXIpSjyDeO0Mj0hAJRiz6LG4L4-c090"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "117944299463331226803",
+              "client_id": "104677375373207560824",
               "client_type": 3
             },
             {
-              "client_id": "280692033654-2f8dsvvosebk0s9r8mjcc2l9bqnusi0b.apps.googleusercontent.com",
+              "client_id": "427617387136-h1hm398kgamcmcsonnta0pvgni0sk2rl.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.appchicguide.thailand"
+                "bundle_id": "com.chicguide.thailand",
+                "app_store_id": "6467481201"
               }
             }
           ]

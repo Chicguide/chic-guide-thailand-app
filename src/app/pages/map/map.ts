@@ -116,7 +116,6 @@ export class MapPage extends BasePage {
       },
       initialBreak: 'bottom',
       freeMode: false,
-      buttonClose: false,
       topperOverflow: true,
       handleKeyboard: false,
     };

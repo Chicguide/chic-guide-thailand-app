@@ -53,6 +53,10 @@ export class User extends Parse.User {
     return User.logOut();
   }
 
+  deleteAccount(data: any = {}): Promise<{ sessionToken: string }> {
+    return Parse.Cloud.run('deleteAccount', data);
+  }
+
   recoverPassword(email: string) {
     return User.requestPasswordReset(email);
   }
@@ -88,10 +92,6 @@ export class User extends Parse.User {
         success: (res: any) => resolve(res), error: (err: any) => reject(err)
       });
     });
-  }
-
-  deleteAccount(data: any = {}): Promise<{ sessionToken: string }> {
-    return Parse.Cloud.run('deleteAccount', data);
   }
 
   get name(): string {
