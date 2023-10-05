@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:14 AS build
+FROM node:18 AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the Ionic application for production
-RUN node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod --base-href ./
+RUN npm run build
 
 # Stage 2: Serve the application in a smaller image
 FROM nginx:alpine
