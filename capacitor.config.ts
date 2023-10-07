@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.chicguide.thailand',
+  appId: 'com.chicguide.appchicguide.thailand',
   appName: 'Chic Guide Thailand',
   webDir: 'www',
   bundledWebRuntime: false,
@@ -22,8 +22,8 @@ const config: CapacitorConfig = {
     GoogleAuth: {
       scopes: ['profile', 'email'],
       iosClientId: '427617387136-h1hm398kgamcmcsonnta0pvgni0sk2rl.apps.googleusercontent.com',
-      androidClientId: '427617387136-dp3kohgeo74hsrvjkjc7v9207c8k41jh.apps.googleusercontent.com',
-      serverClientId: '427617387136-dp3kohgeo74hsrvjkjc7v9207c8k41jh.apps.googleusercontent.com',
+      androidClientId: '969989942144-1chnnan3bv1t5vtbuo6bn1vkdpishmof.apps.googleusercontent.com',
+      serverClientId: '969989942144-1chnnan3bv1t5vtbuo6bn1vkdpishmof.apps.googleusercontent.com',
       forceCodeForRefreshToken: true
     }
   }

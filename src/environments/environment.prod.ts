@@ -5,11 +5,11 @@ export const environment = {
   appImageUrl: 'https://trynearme.app/assets/img/nearme.png',
   appId: 'ChicGuidThailand',
   fbId: '264172519827432',
-  googleMapsApiKey: 'AIzaSyDYsWCmb62mEqZQ9pNz_QoWPSZHY9GV_s8',
+  googleMapsApiKey: 'AIzaSyD1pbOX4-XkGPieACiUKPMoxxC82R2zosA',
   androidHeaderColor: '#5588a7',
   defaultUnit: 'km',
   defaultLang: 'en',
-  googleClientId: '427617387136-dp3kohgeo74hsrvjkjc7v9207c8k41jh.apps.googleusercontent.com',
+  googleClientId: '969989942144-1chnnan3bv1t5vtbuo6bn1vkdpishmof.apps.googleusercontent.com',
   oneSignal: {
     appId: '527b4f66-61bc-4c47-a512-a41f5cf3fc17',
     googleProjectNumber: '1071340130209'
