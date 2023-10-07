@@ -54,7 +54,7 @@
       </div>
 
       <ion-row>
-        <ion-col class="column-center" size-xs="4" size-sm="4" size-md="3" size-lg="3"
+        <ion-col class="column-center" size-xs="12" size-sm="12" size-md="3" size-lg="3"
           *ngFor="let category of categories">
           <ion-card button class="transparent no-shadow" [routerLink]="[pathPrefix + 'places']"
             [queryParams]="{ cat: category.id }">
