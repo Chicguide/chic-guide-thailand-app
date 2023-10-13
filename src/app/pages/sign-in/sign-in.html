@@ -43,7 +43,7 @@
     </div>
 
     <ion-row class="ion-justify-content-center">
-      <!-- <ion-col size-xs="12" size-md="6" *ngIf="isFacebookLoginEnabled">
+      <ion-col size-xs="12" size-md="6" *ngIf="isFacebookLoginEnabled">
         <ion-button strong type="button" color="fb" expand="block" [disabled]="isLoading"
           (click)="onFacebookButtonTouched()">
           <ion-icon slot="start" name="logo-facebook"></ion-icon>
@@ -57,7 +57,7 @@
           <ion-icon slot="start" name="logo-google"></ion-icon>
           <span style="text-transform: none;">{{ 'GOOGLE_LOGIN' | translate }}</span>
         </ion-button>
-      </ion-col> -->
+      </ion-col>
 
       <ion-col size-xs="12" size-md="6" *ngIf="isAppleLoginEnabled">
         <ion-button strong type="button" color="dark" expand="block" [disabled]="isLoading"
