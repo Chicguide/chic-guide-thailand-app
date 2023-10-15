@@ -9,7 +9,7 @@ export const environment = {
   androidHeaderColor: '#5588a7',
   defaultUnit: 'km',
   defaultLang: 'en',
-  googleClientId: '280692033654-uea9jf7ksagemdr3tgrqski7p085bf2s.apps.googleusercontent.com',
+  googleClientId: '817086527950-c1ptfgh98lkm2n4lca65169up55g2v2r.apps.googleusercontent.com',
   oneSignal: {
     appId: '527b4f66-61bc-4c47-a512-a41f5cf3fc17',
     // googleProjectNumber: '1071340130209'
@@ -20,12 +20,12 @@ export const environment = {
     digitsInfo: '1.2-2',
   },
   firebase :{
-    apiKey: "AIzaSyAZje2z1YALVe2YEYZnsAnscsHAVhls9PE",
-    authDomain: "chic-guide-thailand-59013.firebaseapp.com",
-    projectId: "chic-guide-thailand-59013",
-    storageBucket: "chic-guide-thailand-59013.appspot.com",
-    messagingSenderId: "280692033654",
-    appId: "1:280692033654:web:8ece3dd22d07e56062b757",
-    measurementId: "G-6P30MQ2C47"
+    apiKey: "AIzaSyDsav2tGA1mhr1fG_xIBi_hNDsBxKF7zeA",
+    authDomain: "chic-guide-thailand-depl-cb707.firebaseapp.com",
+    projectId: "chic-guide-thailand-depl-cb707",
+    storageBucket: "chic-guide-thailand-depl-cb707.appspot.com",
+    messagingSenderId: "817086527950",
+    appId: "1:817086527950:web:8a1c16262401de76bd139f",
+    measurementId: "G-YTMMPN13Q5"
   }
 };
