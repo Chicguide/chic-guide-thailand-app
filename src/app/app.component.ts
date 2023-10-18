@@ -26,7 +26,7 @@ import { BasePage } from './pages/base-page/base-page';
 import { NavigationEnd } from '@angular/router';
 import { Keyboard, KeyboardStyle } from '@capacitor/keyboard';
 import { isPlatform } from '@ionic/angular';
-import OneSignal from 'onesignal-cordova-plugin';
+import OneSignal, { NotificationWillDisplayEvent } from 'onesignal-cordova-plugin';
 import Utils from './utils';
 import { NotificationPage } from './pages/notification/notification.page';
 
@@ -465,31 +465,58 @@ export class AppComponent extends BasePage {
     OneSignal.Notifications.addEventListener('click', async (res) => {
       const notificationData: any = res.notification.additionalData;
 
-        let page = null;
-        let queryParams = {};
+      let page = null;
+      let queryParams = {};
 
-        if (notificationData.placeId) {
-          page = '/1/home/places/' + notificationData.placeId;
-        } else if (notificationData.postId) {
-          page = '/1/home/posts/' + notificationData.postId;
-        } else if (notificationData.categoryId) {
-          page = '/1/home/places';
-          queryParams = { cat: notificationData.categoryId };
-        }
+      if (notificationData.placeId) {
+        page = '/1/home/places/' + notificationData.placeId;
+      } else if (notificationData.postId) {
+        page = '/1/home/posts/' + notificationData.postId;
+      } else if (notificationData.categoryId) {
+        page = '/1/home/places';
+        queryParams = { cat: notificationData.categoryId };
+      }
 
-        if (page) {
-          this.ngZone.run(() => {
-            this.router.navigate([page], { queryParams });
-          });
-        }
-      });
+      if (page) {
+        this.ngZone.run(() => {
+          this.router.navigate([page], { queryParams });
+        });
+      }
+    });
 
     // Prompts the user for notification permissions.
     //    * Since this shows a generic native prompt, we recommend instead using an In-App Message to prompt for notification permission (See step 7) to better communicate to your users what notifications they will get.
-    OneSignal.Notifications.requestPermission(true).then(
-      (event) => {
-        console.log('[ONE_SIGNAL] push opened', event);
-        
+    OneSignal.Notifications.requestPermission(true).then((event) => {
+      console.log('[ONE_SIGNAL] push opened', event);
+    });
+
+    OneSignal.Notifications.addEventListener(
+      'foregroundWillDisplay',
+      (event:NotificationWillDisplayEvent) => {
+        const notification = (event as any).notification;
+        console.log('[ONE_SIGNAL] push received', notification);
+
+        const notificationData: any = {
+          ...notification.additionalData,
+        };
+
+        notificationData.title = notification.title;
+        notificationData.body = notification.body;
+        notificationData.image_url = notification.bigPicture;
+
+        if (
+          this.platform.is('ios') &&
+          typeof notification.attachments === 'object' &&
+          notification.attachments !== null
+        ) {
+          for (const [key, value] of Object.entries(notification.attachments)) {
+            notificationData.image_url = value;
+          }
+        }
+
+        this.presentNotificationModal(notificationData);
+
+        this.audioService.play('ping');
       }
     );
   }
