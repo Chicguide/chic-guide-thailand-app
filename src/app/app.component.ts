@@ -13,7 +13,12 @@ import { AudioService } from './services/audio-service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Capacitor } from '@capacitor/core';
-import { ActionPerformed, PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
+import {
+  ActionPerformed,
+  PushNotifications,
+  PushNotificationSchema,
+  Token,
+} from '@capacitor/push-notifications';
 import { Device } from '@capacitor/device';
 import { nanoid } from 'nanoid';
 import { App } from '@capacitor/app';
@@ -24,21 +29,20 @@ import { isPlatform } from '@ionic/angular';
 import OneSignal from 'onesignal-cordova-plugin';
 import Utils from './utils';
 import { NotificationPage } from './pages/notification/notification.page';
-import { OpenedEvent } from 'onesignal-cordova-plugin/dist/models/NotificationOpened';
-import NotificationReceivedEvent from 'onesignal-cordova-plugin/dist/NotificationReceivedEvent';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
 export class AppComponent extends BasePage {
-
-  constructor(injector: Injector,
+  constructor(
+    injector: Injector,
     private storage: LocalStorage,
     private userService: User,
     private installationService: Installation,
     private audioService: AudioService,
-    private ngZone: NgZone) {
+    private ngZone: NgZone
+  ) {
     super(injector);
     this.initializeApp();
   }
@@ -48,7 +52,6 @@ export class AppComponent extends BasePage {
   }
 
   async initializeApp() {
-
     this.translate.setDefaultLang(environment.defaultLang);
 
     this.setupParse();
@@ -68,7 +71,6 @@ export class AppComponent extends BasePage {
 
   async loadUser() {
     try {
-
       this.showLoadingView({ showOverlay: false });
 
       const user = User.getCurrent();
@@ -82,13 +84,12 @@ export class AppComponent extends BasePage {
 
       if (Capacitor.isNativePlatform()) {
         this.setupPush();
-        this.setupOneSignal();
+        this.OneSignalInit();
       }
 
       this.showContentView();
       this.updateInstallation();
       this.loadCurrentUser();
-
     } catch (error) {
       this.showErrorView();
 
@@ -99,7 +100,6 @@ export class AppComponent extends BasePage {
   }
 
   setupFacebookWeb() {
-
     (window as any).fbAsyncInit = () => {
       (FB as any).init({
         appId: environment.fbId,
@@ -111,18 +111,18 @@ export class AppComponent extends BasePage {
 
     // Load the SDK asynchronously
     (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    })(document, 'script', 'facebook-jssdk');
   }
 
   async setupDefaults() {
-
     try {
-
       const supportedLangs = ['en', 'es', 'ar'];
       const browserLang = navigator.language.substr(0, 2);
 
@@ -133,12 +133,9 @@ export class AppComponent extends BasePage {
         this.storage.getIsPushEnabled(),
       ];
 
-      let [
-        lang,
-        unit,
-        isDarkModeEnabled,
-        isPushEnabled
-      ] = await Promise.all(promises);
+      let [lang, unit, isDarkModeEnabled, isPushEnabled] = await Promise.all(
+        promises
+      );
 
       if (lang === null && supportedLangs.indexOf(browserLang) !== -1) {
         lang = browserLang;
@@ -167,16 +164,13 @@ export class AppComponent extends BasePage {
       }
 
       this.preference.isPushEnabled = isPushEnabled;
-
     } catch {
       this.preference.lang = environment.defaultLang;
       this.preference.unit = environment.defaultUnit;
     }
-
   }
 
   setupNativeAudio() {
-
     let path = 'pristine.mp3';
 
     if (isPlatform('ios')) {
@@ -187,7 +181,6 @@ export class AppComponent extends BasePage {
   }
 
   setupEvents() {
-
     window.addEventListener('user:login', () => {
       this.loadCurrentUser();
       this.updateInstallation();
@@ -219,10 +212,10 @@ export class AppComponent extends BasePage {
       '/1/explore',
       '/1/posts',
       '/1/profile',
-      '/1/likes'
+      '/1/likes',
     ];
 
-    this.router.events.subscribe(val => {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.preference.isSubPage = !topLevelRoutes.includes(val.url);
         const arr = this.router.url.split('/');
@@ -233,17 +226,15 @@ export class AppComponent extends BasePage {
     if (!environment.production) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-      prefersDark.addEventListener(
-        'change',
-        (mediaQuery) => this.toggleDarkTheme(mediaQuery.matches)
+      prefersDark.addEventListener('change', (mediaQuery) =>
+        this.toggleDarkTheme(mediaQuery.matches)
       );
     }
   }
 
   toggleDarkTheme(isDarkModeEnabled: boolean) {
-
     // Add body class to body
-    document.body.classList.toggle('dark', isDarkModeEnabled)
+    document.body.classList.toggle('dark', isDarkModeEnabled);
 
     // Update theme-color meta tag
     const style = window.getComputedStyle(document.body);
@@ -254,13 +245,13 @@ export class AppComponent extends BasePage {
 
     const primaryColor = style.getPropertyValue('--ion-color-primary').trim();
 
-    document.querySelector('meta[name="theme-color"]')
+    document
+      .querySelector('meta[name="theme-color"]')
       .setAttribute('content', primaryColor);
 
     // Update keyboard style
 
     if (Capacitor.isNativePlatform()) {
-
       if (isDarkModeEnabled) {
         Keyboard.setStyle({
           style: KeyboardStyle.Dark,
@@ -268,10 +259,9 @@ export class AppComponent extends BasePage {
 
         if (isPlatform('android')) {
           StatusBar.setBackgroundColor({
-            color: primaryColor
+            color: primaryColor,
           });
         }
-
       } else {
         Keyboard.setStyle({
           style: KeyboardStyle.Light,
@@ -279,12 +269,11 @@ export class AppComponent extends BasePage {
 
         if (isPlatform('android')) {
           StatusBar.setBackgroundColor({
-            color: environment.androidHeaderColor
+            color: environment.androidHeaderColor,
           });
         }
       }
     }
-
   }
 
   async onChangeLang(lang: string) {
@@ -324,10 +313,9 @@ export class AppComponent extends BasePage {
   }
 
   async presentNotificationModal(notification: any) {
-
     const modal = await this.modalCtrl.create({
       component: NotificationPage,
-      componentProps: { notification }
+      componentProps: { notification },
     });
 
     await modal.present();
@@ -335,7 +323,6 @@ export class AppComponent extends BasePage {
     const { data } = await modal.onDidDismiss();
 
     if (data) {
-
       let page = null;
       let queryParams = {};
 
@@ -353,9 +340,7 @@ export class AppComponent extends BasePage {
   }
 
   setupPush() {
-
     PushNotifications.addListener('registration', async (token: Token) => {
-
       console.log('registration: ' + token.value);
 
       const appInfo = await App.getInfo();
@@ -377,7 +362,7 @@ export class AppComponent extends BasePage {
         localeIdentifier: this.preference.lang || languageCode.value,
         timeZone: timezone,
         badge: 0,
-      }
+      };
 
       if (!id) {
         data.installationId = installationId;
@@ -390,7 +375,9 @@ export class AppComponent extends BasePage {
 
       await this.storage.setInstallationObjectId(id || objectId);
 
-      const installation = await this.installationService.getOne(id || objectId);
+      const installation = await this.installationService.getOne(
+        id || objectId
+      );
 
       const granted: PermissionState = 'granted';
       const { receive } = await PushNotifications.checkPermissions();
@@ -399,7 +386,6 @@ export class AppComponent extends BasePage {
         this.storage.setIsPushEnabled(true);
         this.preference.isPushEnabled = true;
       }
-
     });
 
     // Some issue with our setup and push will not work
@@ -408,96 +394,40 @@ export class AppComponent extends BasePage {
     });
 
     // Show us the notification payload if the app is open on our device
-    PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
-      console.log('Push received: ' + JSON.stringify(notification));
+    PushNotifications.addListener(
+      'pushNotificationReceived',
+      (notification: PushNotificationSchema) => {
+        console.log('Push received: ' + JSON.stringify(notification));
 
-      if (environment.oneSignal?.appId) {
-        return;
-      }
+        if (environment.oneSignal?.appId) {
+          return;
+        }
 
-      let notificationData = notification.data;
+        let notificationData = notification.data;
 
-      if (isPlatform('android')) {
-        notificationData = JSON.parse(notification.data.data);
-      }
-
-      this.presentNotificationModal(notificationData);
-    });
-
-    // Method called when tapping on a notification
-    PushNotifications.addListener('pushNotificationActionPerformed', (action: ActionPerformed) => {
-      console.log('Push action performed: ' + JSON.stringify(action));
-
-      if (environment.oneSignal?.appId) {
-        return;
-      }
-
-      let notificationData = action.notification.data;
-
-      if (isPlatform('android')) {
-        notificationData = JSON.parse(action.notification.data.data);
-      }
-
-      let page = null;
-      let queryParams = {};
-
-      if (notificationData.placeId) {
-        page = '/1/home/places/' + notificationData.placeId;
-      } else if (notificationData.postId) {
-        page = '/1/home/posts/' + notificationData.postId;
-      } else if (notificationData.categoryId) {
-        page = '/1/home/places';
-        queryParams = { cat: notificationData.categoryId };
-      }
-
-      if (page) {
-        this.ngZone.run(() => {
-          this.router.navigate([page], { queryParams });
-        });
-      }
-    });
-  }
-
-  setupOneSignal() {
-
-    const appId = environment?.oneSignal?.appId;
-
-    if (appId) {
-
-      OneSignal.setAppId(appId);
-
-      OneSignal.setNotificationWillShowInForegroundHandler((event: NotificationReceivedEvent) => {
-
-        const notification = (event as any).notification
-        console.log('[ONE_SIGNAL] push received', notification);
-
-        const notificationData: any = {
-          ...notification.additionalData
-        };
-
-        notificationData.title = notification.title;
-        notificationData.body = notification.body;
-        notificationData.image_url = notification.bigPicture;
-
-        if (this.platform.is('ios') &&
-          typeof notification.attachments === 'object' &&
-          notification.attachments !== null) {
-          for (const [key, value] of Object.entries(notification.attachments)) {
-            notificationData.image_url = value;
-          }
+        if (isPlatform('android')) {
+          notificationData = JSON.parse(notification.data.data);
         }
 
         this.presentNotificationModal(notificationData);
+      }
+    );
 
-        this.audioService.play('ping');
+    // Method called when tapping on a notification
+    PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      (action: ActionPerformed) => {
+        console.log('Push action performed: ' + JSON.stringify(action));
 
-        event.complete(null);
-      });
+        if (environment.oneSignal?.appId) {
+          return;
+        }
 
-      OneSignal.setNotificationOpenedHandler((res: OpenedEvent) => {
-        console.log('[ONE_SIGNAL] push opened', res);
+        let notificationData = action.notification.data;
 
-        const notificationData: any = res.notification.additionalData;
+        if (isPlatform('android')) {
+          notificationData = JSON.parse(action.notification.data.data);
+        }
 
         let page = null;
         let queryParams = {};
@@ -516,27 +446,128 @@ export class AppComponent extends BasePage {
             this.router.navigate([page], { queryParams });
           });
         }
-
-      });
-    }
+      }
+    );
   }
+
+  // Call this function when your app starts
+  OneSignalInit(): void {
+    // Uncomment to set OneSignal device logging to VERBOSE
+    // OneSignal.Debug.setLogLevel(6);
+
+    // Uncomment to set OneSignal visual logging to VERBOSE
+    // OneSignal.Debug.setAlertLevel(6);
+
+    // NOTE: Update the init value below with your OneSignal AppId.
+    const appId = environment?.oneSignal?.appId;
+    OneSignal.initialize(appId);
+
+    OneSignal.Notifications.addEventListener('click', async (res) => {
+      const notificationData: any = res.notification.additionalData;
+
+        let page = null;
+        let queryParams = {};
+
+        if (notificationData.placeId) {
+          page = '/1/home/places/' + notificationData.placeId;
+        } else if (notificationData.postId) {
+          page = '/1/home/posts/' + notificationData.postId;
+        } else if (notificationData.categoryId) {
+          page = '/1/home/places';
+          queryParams = { cat: notificationData.categoryId };
+        }
+
+        if (page) {
+          this.ngZone.run(() => {
+            this.router.navigate([page], { queryParams });
+          });
+        }
+      });
+
+    // Prompts the user for notification permissions.
+    //    * Since this shows a generic native prompt, we recommend instead using an In-App Message to prompt for notification permission (See step 7) to better communicate to your users what notifications they will get.
+    OneSignal.Notifications.requestPermission(true).then(
+      (event) => {
+        console.log('[ONE_SIGNAL] push opened', event);
+        
+      }
+    );
+  }
+
+  // setupOneSignal() {
+  //   const appId = environment?.oneSignal?.appId;
+
+  //   if (appId) {
+  //     OneSignal.initialize(appId);
+
+  //     OneSignal.setNotificationWillShowInForegroundHandler((event) => {
+  //       const notification = (event as any).notification;
+  //       console.log('[ONE_SIGNAL] push received', notification);
+
+  //       const notificationData: any = {
+  //         ...notification.additionalData,
+  //       };
+
+  //       notificationData.title = notification.title;
+  //       notificationData.body = notification.body;
+  //       notificationData.image_url = notification.bigPicture;
+
+  //       if (
+  //         this.platform.is('ios') &&
+  //         typeof notification.attachments === 'object' &&
+  //         notification.attachments !== null
+  //       ) {
+  //         for (const [key, value] of Object.entries(notification.attachments)) {
+  //           notificationData.image_url = value;
+  //         }
+  //       }
+
+  //       this.presentNotificationModal(notificationData);
+
+  //       this.audioService.play('ping');
+
+  //       event.complete(null);
+  //     });
+
+  //     OneSignal.setNotificationOpenedHandler((res: OpenedEvent) => {
+  //       console.log('[ONE_SIGNAL] push opened', res);
+
+  //       const notificationData: any = res.notification.additionalData;
+
+  //       let page = null;
+  //       let queryParams = {};
+
+  //       if (notificationData.placeId) {
+  //         page = '/1/home/places/' + notificationData.placeId;
+  //       } else if (notificationData.postId) {
+  //         page = '/1/home/posts/' + notificationData.postId;
+  //       } else if (notificationData.categoryId) {
+  //         page = '/1/home/places';
+  //         queryParams = { cat: notificationData.categoryId };
+  //       }
+
+  //       if (page) {
+  //         this.ngZone.run(() => {
+  //           this.router.navigate([page], { queryParams });
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 
   setupStatusBar() {
     if (this.platform.is('ios')) {
       StatusBar.setStyle({ style: Style.Dark });
     } else {
       StatusBar.setBackgroundColor({
-        color: environment.androidHeaderColor
+        color: environment.androidHeaderColor,
       });
     }
   }
 
   async updateInstallation(data: any = {}) {
-
     try {
-
       if (Capacitor.isNativePlatform()) {
-
         const payload: any = {
           user: null,
           ...data,
@@ -554,17 +585,13 @@ export class AppComponent extends BasePage {
         const res = await this.installationService.save(id, payload);
         console.log('Installation updated', res);
       }
-
     } catch (error) {
       console.log(error);
     }
-
   }
 
   async onLogOut() {
-
     try {
-
       await this.showLoadingView({ showOverlay: true });
       await this.userService.logout();
       if (Capacitor.isNativePlatform()) {
@@ -573,16 +600,12 @@ export class AppComponent extends BasePage {
       await this.dismissLoadingView();
 
       window.location.reload();
-
     } catch (err) {
-
       if (err.code === 209) {
         window.location.reload();
       }
 
       this.dismissLoadingView();
     }
-
   }
-
 }
