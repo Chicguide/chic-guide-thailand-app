@@ -830,3 +830,7 @@ html.ios ion-modal .ion-page {
 ion-input {
   text-overflow: ellipsis;
 }
+
+ion-content {
+  overflow: auto !important;
+}
