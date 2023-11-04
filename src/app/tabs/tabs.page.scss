@@ -45,4 +45,7 @@ ion-tab-bar[slot="bottom"] {
 }
 ion-tab-bar[slot="top"] {
   justify-content: center;
+  ion-tab-button{
+    justify-content: center !important;
+  }
 }
