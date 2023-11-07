@@ -12,6 +12,8 @@ import { LocationAddress } from 'src/app/models/location-address';
 import { WalkthroughPage } from '../walkthrough/walkthrough';
 import { AppConfigService } from 'src/app/services/app-config.service';
 import Swiper, { SwiperOptions } from 'swiper';
+import { AnalyticsService } from 'src/app/services/analytic-service';
+import { User } from '../../services/user-service';
 
 @Component({
   selector: 'app-home',
@@ -57,6 +59,7 @@ export class HomePage extends BasePage {
   constructor(injector: Injector,
     private localStorage: LocalStorage,
     private geolocationService: GeolocationService,
+    private analyticsService: AnalyticsService,
     private appConfigService: AppConfigService) {
     super(injector);
     this.skeletonArray = Array(6);
@@ -114,6 +117,17 @@ export class HomePage extends BasePage {
       }
 
       this.onReload();
+
+      if (User.getCurrent()) {
+        this.analyticsService.setUser(User.getCurrent().username)
+      } else {
+        this.analyticsService.setUser("ChicGuide")
+      }
+  
+      // this.analyticsService.logEvent('page_view', {page: "home"})
+      this.analyticsService.logEvent('screen_view', {screen_name: "home", screen_class : "home"})
+      this.analyticsService.setCurrentScreen('home_page')
+      this.analyticsService.setProperty();
 
     } catch {
       this.showErrorView();

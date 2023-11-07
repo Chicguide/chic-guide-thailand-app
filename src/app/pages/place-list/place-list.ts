@@ -20,6 +20,7 @@ import {
 } from '@angular/animations';
 import { Slide } from 'src/app/services/slider-image';
 import Swiper, { SwiperOptions } from 'swiper';
+import { AnalyticsService } from '../../services/analytic-service';
 
 @Component({
   selector: 'app-place-list',
@@ -102,6 +103,7 @@ export class PlaceListPage extends BasePage {
     private animationCtrl: AnimationController,
     private slideService: Slide,
     private locationService: Location,
+    private analyticsService: AnalyticsService,
     private placeService: Place) {
     super(injector);
     this.skeletonArray = Array(24);
@@ -174,6 +176,8 @@ export class PlaceListPage extends BasePage {
     const cat = this.getQueryParams().cat;
     if (cat) {
       this.params.cat = cat;
+      this.analyticsService.logEvent('screen_view', {screen_name: cat, screen_class : cat, page: "place-list", title: cat})
+      this.analyticsService.setCurrentScreen(cat)
     }
 
     const ratingMin = this.getQueryParams().ratingMin;

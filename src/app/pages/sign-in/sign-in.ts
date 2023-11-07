@@ -14,6 +14,7 @@ import { isPlatform } from '@ionic/angular';
 import * as Parse from 'parse';
 import { Capacitor } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
+import { AnalyticsService } from '../../services/analytic-service';
 
 @Component({
   selector: 'app-sign-in',
@@ -43,6 +44,7 @@ export class SignInPage extends BasePage {
 
   constructor(injector: Injector,
     private userService: User,
+    private analyticsService: AnalyticsService,
     private appConfigService: AppConfigService) {
     super(injector);
   }
@@ -179,7 +181,7 @@ export class SignInPage extends BasePage {
       });
 
       const user = await this.userService.becomeWithSessionToken(sessionToken);
-
+      this.analyticsService.setUser(user.id);
       this.onLoginSuccess(user);
 
     } catch (error) {
@@ -213,8 +215,8 @@ export class SignInPage extends BasePage {
         authData: authData,
         provider: 'facebook',
       });
-
       const user = await this.userService.becomeWithSessionToken(sessionToken);
+      this.analyticsService.setUser(user.id);
 
       this.onLoginSuccess(user);
     } catch (error) {
@@ -241,6 +243,7 @@ export class SignInPage extends BasePage {
         access_token: res.authentication.accessToken,
         id_token: res.authentication.idToken,
       };
+      this.analyticsService.setUser(res.id);
 
       this.isLoading = true;
 
@@ -280,7 +283,7 @@ export class SignInPage extends BasePage {
 
       const { sessionToken } = await this.userService.loginInCloud(formData);
       const user = await this.userService.becomeWithSessionToken(sessionToken);
-
+      this.analyticsService.setUser(this.form.value.username.trim()+"@custommail.com");
       this.onLoginSuccess(user);
 
     } catch (err) {

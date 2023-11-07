@@ -6,7 +6,7 @@ import { User } from '../../services/user-service';
 import { isPlatform } from '@ionic/angular';
 import { AppConfigService } from 'src/app/services/app-config.service';
 import { ContentModalPage } from '../content-modal/content-modal.page';
-
+import { AnalyticsService } from '../../services/analytic-service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.html',
@@ -25,6 +25,7 @@ export class SignUpPage extends BasePage {
 
   constructor(injector: Injector,
     private appConfigService: AppConfigService,
+    private analyticsService: AnalyticsService,
     private userService: User) {
 
     super(injector);
@@ -105,7 +106,8 @@ export class SignUpPage extends BasePage {
       const { sessionToken } = await this.userService.signUpInCloud(formData);
 
       const user = await this.userService.becomeWithSessionToken(sessionToken);
-
+      this.analyticsService.setUser(user.username);
+      
       this.showContentView();
       await this.onDismiss();
 

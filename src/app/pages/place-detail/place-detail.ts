@@ -13,6 +13,7 @@ import { Report } from 'src/app/services/report.service';
 import { AppConfigService } from 'src/app/services/app-config.service';
 import { Share } from '@capacitor/share';
 import { MapStyle } from 'src/app/services/map-style';
+import { AnalyticsService } from '../../services/analytic-service';
 
 @Component({
   selector: 'app-place-detail',
@@ -82,6 +83,7 @@ export class PlaceDetailPage extends BasePage {
     private geolocationService: GeolocationService,
     private reviewService: Review,
     private appConfigService: AppConfigService,
+    private analyticsService: AnalyticsService,
     private zone: NgZone) {
     super(injector);
     this.isReviewsEnabled = true;
@@ -168,6 +170,11 @@ export class PlaceDetailPage extends BasePage {
       }
 
       this.setPageTitle(this.place.title);
+
+      // this.analyticsService.logEvent('place-tist', {page: "place-list", title: this.place.title})
+
+      this.analyticsService.logEvent('screen_view', {screen_name: this.place.title, screen_class : this.place.title, page: "place-list", title: this.place.title})
+      this.analyticsService.setCurrentScreen(this.place.title)
 
       this.setMetaTags({
         title: this.place.title,

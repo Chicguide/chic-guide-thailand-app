@@ -26,6 +26,7 @@
     "@angular/service-worker": "^16.0.0",
     "@capacitor-community/apple-sign-in": "^5.0.0",
     "@capacitor-community/facebook-login": "^5.0.3",
+    "@capacitor-community/firebase-analytics": "^5.0.1",
     "@capacitor-community/native-audio": "^5.0.1",
     "@capacitor/android": "5.4.1",
     "@capacitor/app": "5.0.6",
