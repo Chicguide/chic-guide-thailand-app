@@ -29,6 +29,7 @@ import { isPlatform } from '@ionic/angular';
 import OneSignal, { NotificationWillDisplayEvent } from 'onesignal-cordova-plugin';
 import Utils from './utils';
 import { NotificationPage } from './pages/notification/notification.page';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +42,7 @@ export class AppComponent extends BasePage {
     private userService: User,
     private installationService: Installation,
     private audioService: AudioService,
+    private googleAnalyticsService: GoogleAnalyticsService,
     private ngZone: NgZone
   ) {
     super(injector);
@@ -53,7 +55,7 @@ export class AppComponent extends BasePage {
 
   async initializeApp() {
     this.translate.setDefaultLang(environment.defaultLang);
-
+    this.googleAnalyticsService.startTrackerWithId('G-GYFCLT4TK9');
     this.setupParse();
     this.setupEvents();
 

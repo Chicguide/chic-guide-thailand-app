@@ -43,6 +43,7 @@ import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper';
 // import { IonicSwiper } from '@ionic/angular';
 import { EmptyViewModule } from './components/empty-view/empty-view.module';
 import { NotificationPageModule } from './pages/notification/notification.module';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 SwiperCore.use([ Pagination, Navigation, Autoplay]);
 
@@ -77,6 +78,7 @@ SwiperCore.use([ Pagination, Navigation, Autoplay]);
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    GoogleAnalyticsService
   ],
   bootstrap: [AppComponent]
 })
