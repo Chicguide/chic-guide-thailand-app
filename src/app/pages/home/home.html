@@ -121,10 +121,11 @@
               class="ion-activatable full-width"
               (click)="onSlideTouched(slide)"
             >
-              <div
+              <!-- <div
                 class="slide-img"
                 [style.background-image]="'url(' + slide.image?._url + ')'"
-              ></div>
+              ></div> -->
+              <img [src]="slide.image?._url" style="width:100%"/>
               <ion-ripple-effect type="bounded"></ion-ripple-effect>
             </div>
           </ng-template>
